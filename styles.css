@@ -55,6 +55,20 @@ a {
 a:hover {
     text-decoration: underline;
 }
+#calendar-date {
+	font-weight: bold
+}
+.tab1 {
+	tab-size: 2;
+}
+
+#due-date {
+	color: purple
+}
+
+#calendar-cell {
+	text-align: top
+}
 
 hr {
     border: 0;
