@@ -1,0 +1,113 @@
+
+body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    line-height: 1.2;
+    padding-bottom: 5px;
+}
+.container {
+    width: 80%; /* Take up 80% of the viewport width */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+
+.header-details {
+    margin-left: 20px; /* Indent the content under the title */
+    line-height: 0.8;  /* Reduce line spacing */
+}
+
+
+header {
+    text-align: left;
+    margin: 20px;
+}
+
+section {
+    margin: 20px;
+}
+
+h1, h2 {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 20px 0;
+}
+
+footer{ 
+       text-align: center;    
+       bottom: 5px; 
+       /*width: 60%;*/
+	   color:#2C3E50;
+     	font-size:15px;
+       padding-top:5px;
+}
+
+/* Mobile Styles */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    header, section, footer {
+        margin: 10px;
+        padding: 10px;
+    }
+
+    table, th, td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f4f4f4;
+        font-weight: 600;
+    }
+
+    table {
+        border: none;
+    }
+
+    /* Remove horizontal margin on small screens */
+    hr {
+        margin: 10px 0;
+    }
+
+}
