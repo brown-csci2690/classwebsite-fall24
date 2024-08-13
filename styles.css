@@ -6,26 +6,66 @@ body {
     background-color: #f4f4f4;
     line-height: 1.2;
     padding-bottom: 5px;
+	display: flex
 }
 .container {
     width: 80%; /* Take up 80% of the viewport width */
     margin: 0 auto; /* Center the container horizontally */
 }
 
+#sidebar {
+    width: 200px;
+ 	background: #069494;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    z-index: 1000; /* Ensures sidebar is on top */
+}
+
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    margin: 10px 0;
+}
+
+#sidebar ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+#sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+header, section, footer {
+    margin-left: 220px;
+    padding: 20px;
+    transition: margin-left 0.3s ease; /* Smooth transition when margin changes */
+}
 
 .header-details {
     margin-left: 20px; /* Indent the content under the title */
-    line-height: 0.8;  /* Reduce line spacing */
+	max-width: 70%
+}
+
+/* Header Image */
+.header-image img {
+    max-width: 300px; /* Set the maximum width of the image */
+    height: auto; /* Maintain aspect ratio */
+    margin-left: 20px; /* Space between content and image */
 }
 
 
 header {
     text-align: left;
-    margin: 20px;
-}
-
-section {
-    margin: 20px;
 }
 
 h1, h2 {
@@ -86,28 +126,66 @@ footer{
        padding-top:5px;
 }
 
+#menu-toggle {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    font-size: 24px;
+    z-index: 1001; /* Ensures the button is above sidebar */
+}
+
+
+.table-container {
+    overflow-x: auto; /* Enables horizontal scrolling if needed */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile devices */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
 /* Mobile Styles */
 @media (max-width: 600px) {
     body {
         padding: 10px;
     }
 
+    #sidebar {
+        width: 100%;
+        height: auto;
+        position: fixed;
+        display: none;
+    }
+
+    #menu-toggle.active + #sidebar {
+        display: block;
+    }
+
     header, section, footer {
         margin: 10px;
         padding: 10px;
-    }
-
-    table, th, td {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
+        transition: none; /* Disable transition on mobile */
     }
 
     th, td {
+        font-size: 14px;
         padding: 8px;
-        text-align: left;
-        border: none;
-        border-bottom: 1px solid #ddd;
     }
 
     th {
@@ -115,9 +193,18 @@ footer{
         font-weight: 600;
     }
 
-    table {
+    #menu-toggle {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: #069494;
+        color: white;
         border: none;
+        font-size: 24px;
+        z-index: 1001; /* Ensures the button is above sidebar */
     }
+
 
     /* Remove horizontal margin on small screens */
     hr {

@@ -9,6 +9,19 @@
 </head>
 <body>
     <div class="container">
+	    <nav id="sidebar">
+        <ul>
+            <li><a href="#course-description">Course Description</a></li>
+            <li><a href="#course-structure">Course Structure</a></li>
+            <li><a href="#reading-responses">Reading Responses</a></li>
+            <li><a href="#discussion-lead">Discussion Lead</a></li>
+            <li><a href="#warmup-assignment">Warmup Assignment</a></li>
+            <li><a href="#class-project">Class Project</a></li>
+          		<li><a href="#collaboration">Collaboration Policy</a></li>
+            <li><a href="#course-calendar">Course Calendar</a></li>
+        </ul>
+    </nav>
+
     <header>
         <h1>Brown CSCI 2690: Cloud and Datacenter Operating Systems</h1>
 		<h2>Fall 2024</h2>
@@ -18,6 +31,9 @@
 			<p> Instructor: <a href=https://deeptir.me>Deepti Raghavan</a> (<a href="mailto:deeptir@brown.edu">deeptir at brown.edu</a>)</p>
         	<p>Office Hours: Mondays, 2:00 PM - 4:00 PM, CIT Center 501 (please let the instructor know ahead of time you will be attending).</p>
 		</div>
+    <div class="header-image">
+        <img src="douglas-county-servers.jpg" alt="Google Datacenter" />
+    </div>
     </header>
 
     <hr>
@@ -116,15 +132,52 @@
 		</li>
 		</ul> 
 <br>
-Important dates for the project:
-<ul>
-	<li>Thursday September 5: Project assignment posted.</li>
-	<li>Thursday, September 26: Project proposal due.</li>
-	<li>September 30 - October 4: Mandatory check-in about your proposed project, to ensure you have all the resources you need to complete your project.</li>
-	<li>October 28 - November 1: Mandatory mid-semester check-in, to ensure you are making progress.</li>
-	<li>Tuesday December 10 (and, Thursday December 12, depending on enrollment): In-person class project presentations.</li>
-	<li>Friday, December 13: Project papers due.</li>
-</ul>
+<h3>Project Dates:</h3>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Project Milestone</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Add rows for each class meeting -->
+                <tr>
+                    <td>Thurs 9/6</td>
+                    <td>Project Assignment Posted</td>
+					<td><a href=/project.html>Project Info</a></td>
+                </tr>
+                <tr>
+                    <td>Thurs 9/26</td>
+                    <td>Project Proposal Due</td>
+					<td>Submission Info Coming</a></td>
+                </tr>
+                <tr>
+                    <td>Mon 9/30 - Oct 4</td>
+                    <td>Mandatory Initial Check-In</td>
+					<td>Signup Link Coming</a></td>
+                </tr>
+                <tr>
+                    <td>Oct 28 - Nov 1</td>
+                    <td>Mandatory Mid-Semester Check-In</td>
+					<td>Signup Link Coming</a></td>
+                </tr>
+                <tr>
+                    <td>Tues Dec 10 (and Dec 12 depending on enrollment)</td>
+                    <td>In-class project presentations</td>
+					<td>Presentation Info Coming</a></td>
+                </tr>
+                <tr>
+                    <td>Fri Dec 13</td>
+                    <td>Final Paper Due (in lieu of a final exam)</td>
+					<td>Final Paper Info Coming</a></td>
+                </tr>
+                <!-- Continue adding rows for each date until 12/10/2024 -->
+            </tbody>
+        </table>
+    </div>
     </section>
     <hr>
     
@@ -155,191 +208,64 @@ Finally, by taking this class, you agree to never post any solutions for the war
 
     <hr>
     
-
-    <section id="course-calendar">
-        <h2>Course Calendar</h2>
+<section id="course-calendar">
+    <h2>Course Readings Calendar</h2>
+	<p>The readings and questionnaires corresponding to a particular lecture date are to be completed <em>before that date.</em></p>
+    <div class="table-container">
         <table>
             <thead>
                 <tr>
-                    <th>Week</th>
-                    <th>Tuesday</th>
-                    <th>Thursday</th>
+                    <th>Date</th>
+                    <th>Topics</th>
+                    <th>Papers</th>
+                    <th>Questionnaire Link</th>
+                    <th>Slides/Notes</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Repeat this block for each week -->
+                <!-- Add rows for each class meeting -->
                 <tr>
-                    <td>Week of September 2
-					</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, September 3<br></div>
-						Day before semester starts.
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, September 5<br></div>
-                    </td>
+                    <td>Thurs 9/6</td>
+                    <td>Introduction to the Course</td>
+                    <td>No Assigned Reading</a></td>
+                    <td>No Assigned Questionnaire</a></td>
+                    <td><a href="notes/intro.pdf">Intro Slides</a></td>
                 </tr>
-                <!-- Add more weeks here -->
                 <tr>
-                    <td>Week of September 9</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, September 10<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, September 12<br></div>
-                    </td>
+                    <td>Tues 9/10</td>
+                    <td>Topic 1</td>
+                    <td><a href="papers/paper2.pdf">Paper 2</a></td>
+                    <td><a href="slides/topic1.pdf">Topic 1 Slides</a></td>
+                    <td><a href="assignments/assignment2.pdf">Assignment 2</a></td>
                 </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of September 16<br>
-					<div class="tab1">-Cloudlab warmup assignment <b id="due-date">due on Tuesday September 17.</b></div>
-					</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, September 17<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, September 19<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of September 23
-					<div class="tab1">-Project proposal <b id="due-date">due on Thursday September 26.</div></b>
-					</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, September 24<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, September 26<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of September 30
-					<div class="tab1">-Mandatory project checkin <b id="due-date">over the course of this week.</div></b>
-					</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, October 1<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, October 3<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of October 7</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, October 8<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, October 10<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of October 14</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, October 15<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, October 17<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                   	<td>Week of October 21</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, October 22<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, October 24<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of October 28
-					<div class="tab1">-Mandatory mid-semester project checkin <b id="due-date">over the course of this week.</div></b>
-</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, October 29<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, October 31<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of November 4</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, November 5<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, November 7<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of November 11</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, November 12<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, November 14<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of November 18</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, November 19<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, November 21<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of November 25</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, November 26<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, November 28<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of December 2</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, December 2<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, December 4<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
-                <tr>
-                    <td>Week of December 9<br>
-					<div class="tab1">-Final project presentations <b id="due-date">on Tuesday, December 10.</div></b>
-					<div class="tab1">-Final project paper <b id="due-date">due on Friday December 13.</div></b>
-					</td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Tuesday, December 10<br></div>
-                    </td>
-                    <td id="calendar-cell">
-						<div id="calendar-date">Thursday, December 12<br></div>
-                    </td>
-                </tr>
-                <!-- Add more weeks here -->
+                <!-- Continue adding rows for each date until 12/10/2024 -->
             </tbody>
         </table>
-    </section>
+    </div>
+</section>
 
-    <hr>
 
+<hr>
     <footer>
-        <p>Website designed using chatgpt. The class content and website design is inspired by <a href=https://amyousterhout.com/cse291-fall23/index.html>Amy Ousterhout's datacenter systems class at UCSD</a>. The collaboration policy is taken from <a href=https://cs.nyu.edu/~apanda/classes/sp24/>Aurojit Panda's distributed systems class at NYU</a>.</p>
+        <p>Website designed using chatgpt. The class content and website design is inspired by <a href=https://amyousterhout.com/cse291-fall23/index.html>Amy Ousterhout's datacenter systems class at UCSD</a>. The collaboration policy is taken from <a href=https://cs.nyu.edu/~apanda/classes/sp24/>Aurojit Panda's distributed systems class at NYU</a>. Datacenter image is from <a href=https://www.google.com/about/datacenters/gallery/>Google</a>.</p>
     </footer>
 </body>
 </div>
 </html>
+
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.querySelector('header, section, footer');
+
+    menuToggle.addEventListener('click', function() {
+        if (sidebar.style.display === 'block') {
+            sidebar.style.display = 'none';
+            mainContent.style.marginLeft = '0'; /* Reset margin when sidebar is hidden */
+        } else {
+            sidebar.style.display = 'block';
+            mainContent.style.marginLeft = '220px'; /* Adjust margin when sidebar is shown */
+        }
+    });
+</script>
+
