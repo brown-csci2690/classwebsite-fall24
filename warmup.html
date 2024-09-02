@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSCI 2690 Fall 24</title>
+    <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body> 
+    <div class="container">
+    <header>
+        <h1>Brown CSCI 2690: Cloud and Datacenter Operating Systems</h1>
+		<h2>Fall 2024</h2>
+		<h2>Warmup Assignment</h2>
+
+      <p>Go through the instructions below in sequence. Please submit your answers to the questions in the <a href="#assignment-questions">submit your assignment</a> section and your <a href="#dpdk">DPDK echo code</a> (just the .c file) to Canvas by 11:59 pm on Tuesday, September 17.</p>
+    </header>
+
+    <hr>
+
+    <section id="cloudlab">
+        <h2>Cloudlab</h2>
+        <p>
+        The goal of this assignment is to familiarize you with <a href="https://www.cloudlab.us/">CloudLab</a>, so that you may use it as an experimentation and development platform for your research
+        project. In addition, you will analyze the overheads of
+        different network stacks (Linux's, RDMA, and DPDK) by measuring round-trip times (RTTs) between two servers.</br></br>
+        <b>Note: Cloudlab is a public resource where due to high demand, certain  machine types may already all be in use. </b>We have chosen a machine type that historically has not had much
+        demand, so you should be able to get a machine allocation in time to complete the assignment. <b>Please start early so you avoid not submitting the assignment due to lack of
+            resources.</b>
+		</p>
+    </section>
+    <hr>
+    <section id="cloudlab">
+        <h2>Cloudlab Machine Setup</h2>
+        <p>
+        Sign up for a CloudLab Account using the <a href="https://cloudlab.us/signup.php">signup</a> link. Select "Join Existing Project" and enter "browncs2690fa24" as the Project ID.
+        You will also need to upload an SSH public key. The instructor will approve your account application.</p>
+
+		</p>
+
+        </br>
+        <h3>Create a New Profile</h3>
+      <p>A "project profile" describes the configuration of one or more servers, including their network connections and disk images. Create your own profile:
+      <ol>
+	<li>Create a new project profile by clicking on "Experiments" and then "Create Experiment Profile".</li>
+	<li>Create a new topology with 2 "Bare Metal PC" servers (i.e., "nodes") connected with a link.</li>
+	<li>Ensure that your servers are placed in the same rack by clicking on the link and unchecking the "Allow interswitch mapping" box.</li>
+	<li>Configure your servers. Click on each and select hardware type m510 and disk image "UBUNTU20-64-STD". You can read more about the m510 nodes, as well as the other types of available servers, on the <a href="https://docs.cloudlab.us/hardware.html">hardware page of the CloudLab website</a>.
+	<li>We found that the image configuration dropdown did not work well in Firefox, so if you are having issues with the previous step, try a different browser such as Chrome.</li>
+      </ol></p>
+
+        </br>
+        <h3>Run an Experiment</h3>
+
+<p> From your <a href="https://www.cloudlab.us/user-dashboard.php">dashboard</a>, select your new profile and instantiate it. It may take several minutes for your experiment to start. Once it has started, <code>ssh</code> to your servers (see the "List View" tab for ssh commands).</p>
+
+      <p>Remember to terminate your experiment when you are not using it. Experiments will expire automatically after 16 hours. When your experiment ends, the contents of the local disks will be lost, so remember to save your code elsewhere (e.g., in git or by using <code>scp</code> to copy it to your own machine).</p>
+        <h3>Find your Servers' IP and MAC Addresses</h3>
+
+<p>The m510 nodes each have two network interfaces. One is for control traffic, including connecting to the public internet, and the other is for running experiments. List the network interfaces on each node using the <code>lshw</code> tool: <code>sudo lshw -class net</code>. The interface labeled "eno1d1" is the experimental interface. Find the IP and ethernet (MAC) addresses of this interface on each server by running <code>ifconfig</code>. If you don't see the "eno1d1" interface listed by <code>ifconfig</code>, you can bring it up and set its IP (If you are unsure what IP to use, you can try <code>10.10.1.1</code> for one and <code>10.10.1.2</code> for the other):</p>
+
+      <pre><code>$ sudo ifconfig eno1d1 up
+$ sudo ifconfig eno1d1 [IP]</code></pre>
+
+</section>
+<hr>
+<section id="ping">
+      <h2>Measure RTTs with Ping</h2>
+      <p>Begin by using the Linux <a href="https://linux.die.net/man/8/ping">ping</a> utility to measure the round-trip time between your two servers. For starters, on server 0 run: <code>ping [IP of server 1]</code>. Next, use the "count" and "flood" options to send 1 million pings back-to-back (you will need to use <code>sudo</code>). This will take about 30 seconds to complete. Record the average RTT.</p><br>
+<b>Hint: </b>If you are unsure about the count or flood options, try <code>ping -h</code> to see the help options.
+
+</section>
+<hr>
+<section id="rdma">
+      <h2>Measure RTTs with RDMA</h2>
+      <p>Next, measure the RTT between your two servers using RDMA with the Infiniband Verbs Performance Tests (<a href="https://github.com/linux-rdma/perftest">perftest</a>). First, install perftest:</p>
+      <pre>$ sudo apt-get update
+$ sudo apt-get install perftest</pre>
+
+      <p>Use the tool <code>ib_read_lat</code> to measure the RTT between the two servers using RDMA READ operations. For example, run <code>ib_read_lat</code> on server 1 and then <code>ib_read_lat [IP of server 1]</code> on server 0. Use the "iters" and "size" options to again perform 1 million operations and to set the message size to 64 bytes to match the size of ping packets. Record the average RTT.</p>
+
+      <p>Next, use the tool <code>ib_send_lat</code> to measure the RTT between the two servers using RDMA SEND operations. Again, perform 1 million operations and set the message size to 64 bytes (you must specify these options on both servers). Note that the <code>ib_send_lat</code> tool divides the RTT by 2 before outputing results, so you will need to double the reported values to obtain the RTT. Record the average RTT.</p>
+
+</section>
+<hr>
+<section id="dpdk">
+      <h2>Measure RTTs with DPDK</h2>
+      <hr>
+      <p>Finally, implement a simple echo server using DPDK, and use it to again measure the RTT between your two servers. These instructions will explain how to download and build DPDK and its dependencies; you should do this on both servers. We will provide starter code that implements a DPDK client that generates packets and measures RTTs, and your job is to implement the DPDK server that echos packets back to the client.</p>
+
+      <h3>Install the NVIDIA MLNX_OFED</h3>
+      <p>The NICs on the m510 nodes are NVIDIA ConnectX-3 NICs. To use these NICs with DPDK, you need to download and install the NVIDIA MLNX_OFED, which provides several libraries and drivers for these NICs. </p>
+
+      <p>First, download the OFED version that is compatible with these NICs and OS. Open the <a href="https://network.nvidia.com/products/infiniband-drivers/linux/mlnx_ofed/">downloads page</a> in a browser and download OFED version 4.9-7.1.0.0-LTS for Ubuntu 20.04 x86_64, in tar format. Then copy it to both of your CloudLab nodes (e.g., using <code>scp</code>).</p>
+ 
+      <p>Next, untar the OFED and install it. The installation process takes about 7 minutes.</p>
+      <pre><code>$ tar -xvzf MLNX_OFED_LINUX-4.9-7.1.0.0-ubuntu20.04-x86_64.tgz
+$ pushd MLNX_OFED_LINUX-4.9-7.1.0.0-ubuntu20.04-x86_64
+$ sudo ./mlnxofedinstall --upstream-libs --dpdk
+$ popd</code></pre>
+
+      <p>Now reload the driver:</p>
+      <pre><code>$ sudo /etc/init.d/openibd restart</code></pre>
+      <p>We found that the interface sometimes go down after this step; run <code>ifconfig</code> to see if the <code>eno1d1</code> interface is still up, and if not, follow the instructions above to get the interface back up with <code>ip link</code>.
+</p>
+
+      <h3>Download and Build DPDK</h3>
+      <p>First install DPDK's dependencies:</p>
+      <pre><code>$ sudo apt-get install meson python3-pyelftools</code></pre>
+
+      <p>Next, clone DPDK and checkout version 22.11 (other versions may also work):</p>
+      <pre><code>$ git clone https://github.com/DPDK/dpdk
+$ cd dpdk
+$ git checkout tags/v22.11 -b v22.11</code></pre>
+
+      <p>Build DPDK:</p>
+      <pre><code>$ meson build
+$ ninja -C build
+$ sudo ninja -C build install
+$ sudo ldconfig</code></pre>
+
+      <p>DPDK relies on huge pages (we will discuss these later when we discuss memory management). Configure huge pages:</p>
+      <pre><code>$ echo 1024 | sudo tee /sys/devices/system/node/node0/hugepages/hugepages-2048kB/nr_hugepages</code></pre>
+
+      <h3>Build and Run the Echo App</h3>
+      <p>Download the starter code from Canvas (Makefile and dpdk_echo.c) and copy the files to each server using <code>scp</code>. Then build the app by running <code>make</code> in the directory with the copied files.</p>
+
+      <p>To run the echo app, first start the server running on server 0:</p>
+      <pre><code>$ sudo ./dpdk_echo -l2 --socket-mem=128 -- UDP_SERVER [IP of server 0]</code></pre>
+
+      <p>Next, run the client on server 1:</p>
+      <pre><code>$ sudo ./dpdk_echo -l2 --socket-mem=128 -- UDP_CLIENT [IP of server 1] [IP of server 0] [MAC of server 0]</code></pre>
+
+      <p>The server should print out that it receives a packet. However, the current server code does not respond, so the client should exit after 5 seconds and output that 0 echos were completed.</p>
+
+      <h3>Implement the Echo Server</h3>
+      <p>Your job is to implement the DPDK echo server by filling in the code where it currently says <code>/* TODO: YOUR CODE HERE */</code>. For each packet the server receives, it should immediately echo a packet back to the client. The echoed packet should contain the same contents as the received packet, except for the addresses in the packet headers.</p>
+
+      <p>As a starting point, you may find it helpful to read through the code for <code>run_client</code>, to see an example of how to send, receive, and manipulate packets using DPDK. Note that <code>struct rte_mbuf</code> is the data structure that DPDK uses to represent a packet. You can also consult the DPDK API documentation (e.g., <a href="https://doc.dpdk.org/api/rte__ether_8h.html">DPDK's functions for manipulating ethernet addresses</a>). To debug your code, consider using DPDK's <code>rte_pktmbuf_dump()</code> function to view packets or Linux's <code>inet_ntop()</code> to convert IP addresses to a human-readable format.</p>
+
+      <p>Once your echo server works, use your echo app to measure the RTT between your two servers. Make sure to remove the print statement in the server before you measure the RTT!</p>
+
+</section>
+<hr>
+<section id="assignment-questions">
+      <h2>Submit Your Assignment</h2>
+      <p>Briefly answer the questions below. Feel free to consult the Internet, but answer the questions in your own words.</p>
+      <ol>
+	<li>For each measurement approach (ping, RDMA READ, RDMA SEND, and DPDK echo), what hardware or software component on the server generates a response to each request?</li>
+	<li>What was the average RTT you observed using each tool?</li>
+	<li>Order the tools from lowest to highest average RTT, based on your measurements. What software or hardware differences are responsible for the differences in RTTs?</li>
+	<li>Some of the tools also reported tail and/or max RTT. What are some factors that could cause these tail metrics to be significantly higher than the averages?</li>
+	<li>We didn't measure throughput, but suppose you wrote a benchmark to measure the maximum achievable throughput with each approach (using at most 1 core on client and server). Which tools do you think would provide the lowest and highest throughputs, and why?</li>
+	<li>(Optional) If you have written code that uses Linux sockets to send and receive packets, how was programming with DPDK's APIs different from programming with Linux's sockets API?</li>
+      </ol>
+</section>
+
+<hr>
+    <footer>
+        <p>This warmup assignment was taken almost exactly from Amy Ousterhout's <a href="https://amyousterhout.com/cse291-fall23/assignment.html">assignment</a> at CSE in UCSD (with her permission), which was inspired by
+            Adam Belay's <a href="https://abelay.github.io/6828seminar/lab1.html">assignment</a> at MIT.</p>
+    </footer>
+</body>    
+</div>
+</html>
+
+
